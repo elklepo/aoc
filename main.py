@@ -15,12 +15,14 @@ if __name__ == '__main__':
     with open(f'./day{day}/input1', 'r') as f:
         cnt1 = f.read().rstrip()
 
-    print("### TASK 1 - INPUT 0 ###")
-    day_module.task1(cnt0)
-    print("### TASK 1 - INPUT 1 ###")
-    day_module.task1(cnt1)
+    if hasattr(day_module, 'task1'):
+        print("### TASK 1 - INPUT 0 ###")
+        day_module.task1(cnt0)
+        print("### TASK 1 - INPUT 1 ###")
+        day_module.task1(cnt1)
 
-    print("### TASK 2 - INPUT 0 ###")
-    day_module.task2(cnt0)
-    print("### TASK 2 - INPUT 1 ###")
-    day_module.task2(cnt1)
+    if hasattr(day_module, 'task2'):
+        print("### TASK 2 - INPUT 0 ###")
+        day_module.task2(cnt0)
+        print("### TASK 2 - INPUT 1 ###")
+        day_module.task2(cnt1)
