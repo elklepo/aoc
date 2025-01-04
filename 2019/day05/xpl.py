@@ -29,12 +29,10 @@ class IntcodeVM:
         print(self.eval_param(a))
 
     def jt(self, a, b):
-        if self.eval_param(a):
-            return self.eval_param(b)
+        return self.eval_param(b) if self.eval_param(a) else None
 
     def jf(self, a, b):
-        if not self.eval_param(a):
-            return self.eval_param(b)
+        return self.eval_param(b) if not self.eval_param(a) else None
 
     def slt(self, a, b, c):
         self.inst[c.val] = int(self.eval_param(a) < self.eval_param(b))
