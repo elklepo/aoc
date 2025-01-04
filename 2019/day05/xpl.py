@@ -48,19 +48,21 @@ class IntcodeVM:
         while self.running:
             op = self.inst[self.ip]
 
-            handler, no_params = {
-                1: (self.add, 3),
-                2: (self.mul, 3),
-                3: (self.inp, 1),
-                4: (self.out, 1),
-                5: (self.jt,  2),
-                6: (self.jf,  2),
-                7: (self.slt, 3),
-                8: (self.se,  3),
-                99: (self.ext, 0)
+            handler = {
+                1:  self.add,
+                2:  self.mul,
+                3:  self.inp,
+                4:  self.out,
+                5:  self.jt,
+                6:  self.jf,
+                7:  self.slt,
+                8:  self.se,
+                99: self.ext
             }[op % 100]
 
+            no_params = handler.__code__.co_argcount -1
             params = (self.Parameter(self.inst[self.ip + i + 1], (op // 10**(2+i) % 10) == 1) for i in range(no_params))
+
             next_ip = handler(*params)
             self.ip = next_ip if next_ip is not None else self.ip + no_params + 1
 
