@@ -60,7 +60,7 @@ class IntcodeVM:
                 99: self.ext
             }[op % 100]
 
-            no_params = handler.__code__.co_argcount -1
+            no_params = handler.__code__.co_argcount - 1
             params = (self.Parameter(self.inst[self.ip + i + 1], (op // 10**(2+i) % 10) == 1) for i in range(no_params))
 
             next_ip = handler(*params)
@@ -68,11 +68,9 @@ class IntcodeVM:
 
 
 def task1(cnt):
-    inst = list(map(int, cnt.split(',')))
-    vm = IntcodeVM(inst, [1])
+    vm = IntcodeVM(list(map(int, cnt.split(','))), [1])
     vm.run()
 
 def task2(cnt):
-    inst = list(map(int, cnt.split(',')))
-    vm = IntcodeVM(inst, [5])
+    vm = IntcodeVM(list(map(int, cnt.split(','))), [5])
     vm.run()
